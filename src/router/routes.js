@@ -1,12 +1,75 @@
 
-const routes = [
+const routes = [ 
   {
     path: '/',
+    name: 'home',
+    component: () => import('pages/Home.vue'),
+  },  
+  {
+    path: '/auth2',
+    name: 'auth2',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Auth.vue') }
+    ]
+  },
+  {
+    path: '/details',
+    name: 'details',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Details.vue') }
+    ]
+  },
+  {
+    path: '/map',
+    name: 'map',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Mapa.vue') }
+    ]
+  },
+  {
+    path: '/modal',
+    name: 'modal',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/modal.vue') }
+    ]
+  },
+  {
+    path: '/conf',
+    name: 'conf',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Conf.vue') }
+    ]
+  },
+  {
+    path: '/auth',
+    name: 'auth',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/AuthFinal.vue') }
+    ]
+  },
+  {
+    path: '/conf2',
+    name: 'conf2',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Conf2.vue') }
+    ]
+  },
+  {
+    path: '/slider',
+    name: 'slider',
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Index.vue') }
     ]
   }
+  
 ]
 
 // Always leave this as last one
