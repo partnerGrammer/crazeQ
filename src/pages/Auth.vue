@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
+  <div style="position: fixed;">
  <q-tabs
           v-model="tab"
           dense
@@ -17,9 +17,9 @@
         <q-separator />
 
         <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="register" active>
+          <q-tab-panel name="register" >
             <!-- Inicio formulario registro -->
-            <div class="text-h6" style="margin-top:40%;">Registro</div>
+            <div class="text-h6" style="margin-top:50%;">Registro</div>
             
     <q-form
       @submit="onSubmit"
@@ -33,7 +33,7 @@
         label="Correo *"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Please type something']"
-        style="top:50%;"
+        style="top:10%;"
       />
 
       <q-input
@@ -65,7 +65,7 @@
 
 
             <!-- Inicio formulario login -->
-            <div class="text-h6" style="margin-top:40%;">Login</div>
+            <div class="text-h6" style="margin-top:50%;">Login</div>
             
  <q-form
       @submit="onSubmit"

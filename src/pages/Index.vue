@@ -1,6 +1,6 @@
 <template>
-  <q-layout >
-    <q-page-container class="fondo">
+  <q-layout style="position: fixed;">
+    <q-page-container class="fondo" >
       <q-page v-if="posts.length != 0">
       
       <q-slide-item @left="onLeft" @right="onRight" left-color="pink-2" right-color="pink-2" ref="elemento">
@@ -66,7 +66,7 @@ export default {
 <style>
   .fondo{
     background-color: pink;
-    
+    /* position: fixed; */
   }
   .altura{
     height: 82vh;
