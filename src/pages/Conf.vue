@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-      <q-btn color="white" text-color="black" label="<"  style="float:right;"/>
+      <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right;"/>
     <div class="q-gutter-sm" style="margin-top:-10%;">        
     <q-list>
     <h4>Filtros</h4>

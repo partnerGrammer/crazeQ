@@ -15,7 +15,7 @@
         <q-tab-panel name="mails" >
 
           <!-- Inicio formulario registro -->
-            <div class="text-h6" style="margin-top:10%;margin-bottom:10%;">Registro</div>
+            <div class="text-h6" style="margin-top:5%;margin-bottom:10%;">Registro</div>
             
     <q-form
       @submit="onSubmit"
@@ -59,7 +59,7 @@
 
         <q-tab-panel name="alarms">
            <!-- Inicio formulario login -->
-            <div class="text-h6" style="margin-top:20%;">Login</div>
+            <div class="text-h6" style="margin-top:5%;">Login</div>
             
  <q-form
       @submit="onSubmit"

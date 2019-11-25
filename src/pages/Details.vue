@@ -4,11 +4,12 @@
       <q-page style="height:100vh;">
       
       <div class="wrapp"> 
-          <q-btn color="white" text-color="black" label="Back" />
+          <q-btn color="white" text-color="black" label="Back" to="/closet" />
           <q-card class="my-card">           
             <q-img
             src="https://vignette.wikia.nocookie.net/nickelodeon/images/e/ed/14909590588313-0.jpg/revision/latest?cb=20181018231543"
             spinner-color="white"
+            style="height:55vh;"
             />
           </q-card><br>
          

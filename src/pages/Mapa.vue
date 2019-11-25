@@ -4,7 +4,7 @@
   :center="{lat:28.674598, lng:-106.079639}"
   :zoom="19"
   map-type-id="terrain"
-  style="width: 100vw; height: 96vh;"
+  style="width: 100vw; height: 92vh;"
 >
  <gmap-custom-marker :marker="marker">
     <img src="../assets/logocraze.png" style="width:20vw;" @click="icon = true"/>
