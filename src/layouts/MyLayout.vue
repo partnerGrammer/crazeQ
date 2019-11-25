@@ -99,6 +99,7 @@ width:8vw; height: 4vh;
 }
 .tipo{
   height:8%;
+  z-index: 100000;
 }
 @media screen and (min-width: 0px) and (max-width: 350px) {
      .caja{

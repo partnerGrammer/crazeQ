@@ -8,11 +8,16 @@ const routes = [
   {
     path: '/auth2',
     name: 'auth2',
-    component: () => import('layouts/MyLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Auth.vue') }
-    ]
-  },
+    component: () => import('pages/Auth.vue'),
+  },  
+  // {
+  //   path: '/auth2',
+  //   name: 'auth2',
+  //   component: () => import('layouts/MyLayout.vue'),
+  //   children: [
+  //     { path: '', component: () => import('pages/Auth.vue') }
+  //   ]
+  // },
   {
     path: '/details',
     name: 'details',
@@ -53,14 +58,19 @@ const routes = [
       { path: '', component: () => import('pages/Conf.vue') }
     ]
   },
+  // {
+  //   path: '/auth',
+  //   name: 'auth',
+  //   component: () => import('layouts/MyLayout.vue'),
+  //   children: [
+  //     { path: '', component: () => import('pages/AuthFinal.vue') }
+  //   ]
+  // },
   {
     path: '/auth',
     name: 'auth',
-    component: () => import('layouts/MyLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/AuthFinal.vue') }
-    ]
-  },
+    component: () => import('pages/AuthFinal.vue'),
+  },  
   {
     path: '/conf2',
     name: 'conf2',

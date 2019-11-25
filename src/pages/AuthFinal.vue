@@ -1,5 +1,5 @@
     <template>
-    <div class="" >
+    <div style="position: fixed;" >
        <div class="q-gutter-y-md " >
       <q-option-group
         v-model="panel"
@@ -46,7 +46,7 @@
       />
 
       <div style="text-align: center;">
-        <q-btn color="black" class="full-width" label="Registrarse" type="submit" />
+        <q-btn color="black" class="full-width" label="Registrarse" to="/slider" type="submit" />
         <!-- <q-btn type="reset" color="black" class="full-width" label="Limpiar" /> -->
         <img src="../assets/separador.png" style="width:50%; margin-top:5%;"> <br>
         <img src="../assets/google.png" style="width:10%; margin-top:5%; margin-right:5%;">
@@ -90,7 +90,7 @@
       />
 
       <div style="text-align: center;">
-        <q-btn color="black" class="full-width" label="Registrarse" type="submit" />
+        <q-btn color="black" class="full-width" label="Registrarse" to="/slider" type="submit" />
         <!-- <q-btn type="reset" color="black" class="full-width" label="Limpiar" /> -->
         <img src="../assets/separador.png" style="width:50%; margin-top:5%;"> <br>
         <img src="../assets/google.png" style="width:10%; margin-top:5%; margin-right:5%;">

@@ -1,5 +1,5 @@
 <template>
-    <div style=" width:100%;">
+    <div style=" width:100%; position: absolute;" >
         <q-option-group
         v-model="panel"
         inline

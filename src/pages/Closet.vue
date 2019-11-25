@@ -2,8 +2,9 @@
 <div style="height: 90%;">
              <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%;"/>
              <div class="text-h5" style="margin-top:5%;margin-left:5%;">Prendas que te gustan</div>  
+              <hr style="margin-top:5%;">
     <div class="contenedor">            
-           
+          
           <!-- Inicio segunda lista -->
                                   <q-intersection
                                     v-for="index in 10"
@@ -11,7 +12,7 @@
                                     once
                                     transition="scale"
                                   >
-                                  <div class="row" style="margin-top:2vh; margin-bottom:-10%;">
+                                  <div class="row" style="margin-top:-1vh; margin-bottom:-10%;">
                                     <!-- <div class="col-6"><img :src="post.url" style="width:33vw; "></div> -->
                                      <q-btn flat class="caja"  to="/details" >
                                      <q-img

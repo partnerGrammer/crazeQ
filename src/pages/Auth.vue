@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div style="position: fixed;">
  <q-tabs
           v-model="tab"
           dense
