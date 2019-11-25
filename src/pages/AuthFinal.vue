@@ -59,7 +59,7 @@
 
         <q-tab-panel name="alarms">
            <!-- Inicio formulario login -->
-            <div class="text-h6" style="margin-top:20%;">Login</div>
+            <div class="text-h6" style="margin-top:10%;">Login</div>
             
  <q-form
       @submit="onSubmit"

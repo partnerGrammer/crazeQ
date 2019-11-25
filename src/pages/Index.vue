@@ -70,7 +70,7 @@ export default {
   }
   .altura{
     height: 82vh;
-    width: 100%
+    /* width: 100%; */
   }
   @media screen and (min-width: 150px) and (max-width: 750px) {
       #like{
