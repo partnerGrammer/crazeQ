@@ -3,5 +3,8 @@
   "appName": "Quasar App",
   "bundledWebRuntime": false,
   "npmClient": "npm",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "url": "http://192.168.56.1:8080"
+  }
 }
