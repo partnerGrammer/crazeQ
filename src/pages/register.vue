@@ -71,6 +71,7 @@ data() {
         this.name = ''
         this.email = ''
         this.password = ''
+        console.log('Usuario creado con exito'+ email)
         console.log(user)
       }).catch(err =>{
         this.error = err.message

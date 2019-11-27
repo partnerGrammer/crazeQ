@@ -31,7 +31,7 @@ const routes = [
     name: 'map',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/modal.vue') }
+      { path: '', component: () => import('pages/modal2.vue') }
     ]
   },
   {
@@ -47,7 +47,7 @@ const routes = [
     name: 'modal',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Mapa.vue') }
+      { path: '', component: () => import('pages/modal2.vue') }
     ]
   },
   {

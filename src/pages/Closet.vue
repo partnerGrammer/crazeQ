@@ -1,50 +1,30 @@
 <template>
-<div style="height: 90%; position:absolute;">
+<div style="height: 100%; position:absolute;">
              <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%; top:3%;"/>
              <div class="text-h5" style="margin-top:5%;margin-left:5%;">Prendas que te gustan</div>  
               <hr style="margin-top:5%;">
-    <div class="contenedor">            
+         
           
           <!-- Inicio segunda lista -->
-                                  <q-intersection
-                                    v-for="index in 10"
-                                    :key="index"
-                                    once
-                                    transition="scale"
-                                  >
-                                  <div class="row">
-                                    <!-- <div class="col-6"><img :src="post.url" style="width:33vw; "></div> -->
-                                     <q-btn flat class="caja"  to="/details" >
-                                     <q-img
-                                      :src="post.url"
-                                      spinner-color="white"
-                                      class="rounded-borders"
-                                      style="width:43vw;"
-                                    >
-                                    </q-img>
-                                    <div class="text">Descripcion</div>
-                                    </q-btn>
-                                    
-                                    <q-space />
-                                    <!-- <div class="col-6"><img :src="post.url" style="width:33vw; margin-left:7%;"></div> -->
-                                    <q-btn flat class="caja"  to="/details" >
-                                     <q-img
-                                      :src="post.url"
-                                      spinner-color="white"
-                                      class="rounded-borders"
-                                      style="width:43vw;"
-                                    >
-                                    </q-img>
-                                    <div class="text">Descripcion</div>
-                                    </q-btn>
-                                  </div>
-                                      
-
-                                  </q-intersection>
+            <div class="row q-col-gutter-x-xs q-col-gutter-y-lg" style="margin-bottom:15%;">
+                    <q-btn flat v-for="post in posts"
+                       :key="post" to="/details" class="contenedor">
+                       <q-img
+                         :src="post.url"
+                         spinner-color="white"
+                         class="rounded-borders imagencloseth"
+                         
+                         to="/details"
+                       >
+                       <div class="text" style="width:100%; text-align:center;">Descripcion</div>
+                       </q-img>
+                     </q-btn>     
+                 
+                    </div>
             <!-- fin segunda lista -->
       
     </div>
-    </div>
+  
 </template>
 
 <script>
@@ -57,6 +37,11 @@ export default {
         post: ''
     }
   },
+  
+    methods:{
+      myFunction(){
+  // alert('Detalles');
+}},
    created(){
 
      axios.get("https://backend-app-laravel.herokuapp.com/api/getGallery").then(response=>{
@@ -70,10 +55,33 @@ export default {
  
 </script>
 <style>
-.contenedor{
-    margin-left:   15%;
-    margin-right:  15%;
-    margin-bottom: 5%;
-    margin-top: 5%;    
-}
+
+ @media screen and (min-width: 150px) and (max-width: 400px) {
+      .contenedor{
+           left: 5%;
+      margin-left:   1%;
+      margin-right:  1%;
+      margin-bottom: -5%;
+      margin-top:    1%;    
+      }
+      .imagencloseth{
+        width:    40vw;
+        height:   100%;
+      }
+      }
+       @media screen and (min-width: 400px) and (max-width: 1400px) {
+      .contenedor{
+        left: 5%;
+      margin-left:   1%;
+      margin-right:  2%;
+      margin-bottom: -2%;
+      margin-top:    1%;    
+      }
+      .imagencloseth{
+        width:    40vw;
+        height:   100%;
+      }
+      }
+
+
 </style>

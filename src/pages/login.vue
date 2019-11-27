@@ -41,7 +41,7 @@
 
       </div>
     </q-form>
-
+<div class="text-h5" v-if="acceso=='true'"> Accesando...</div>
   </div>
     </template>
    
@@ -59,15 +59,17 @@ data() {
        user:'',   
        email:'',
        password:'',
-       error:''
+       error:'',
+       acceso: 'false'
     }
   },
   methods:{
     onSubmit(){
       this.error = ''
       console.log('dentro del motodo')
-      firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user =>{
-        this.$router.push({name:'conf'})
+      firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user =>{        
+        this.$router.push({name:'slider'})
+        alert('Acceso conseguido')
         console.log('acceso satisfactorio')
       }).catch(err =>{
         this.error = err.message
