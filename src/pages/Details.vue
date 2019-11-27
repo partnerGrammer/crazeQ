@@ -1,15 +1,16 @@
 <template>
-  <q-layout style="height:100vh;">
-    <q-page-container style="height:100vh;">
-      <q-page style="height:100vh;">
-      
-      <div class="wrapp"> 
-          <q-btn color="white" text-color="black" label="Back" to="/closet" />
-          <q-card class="my-card">           
+<div style="height: 90%; width:100%; position:absolute;">
+             <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%; top:2%;"/>
+         
+      <div class="wrapp"  > 
+        
+          <q-card class="my-card" >    
+                   
             <q-img
             src="https://vignette.wikia.nocookie.net/nickelodeon/images/e/ed/14909590588313-0.jpg/revision/latest?cb=20181018231543"
             spinner-color="white"
-            style="height:55vh;"
+            style="height:65vh;"
+            :ratio="4/3"
             />
           </q-card><br>
          
@@ -83,9 +84,8 @@
 
  </div>
       <br>
-    </q-page>
-    </q-page-container>
-  </q-layout>
+  
+  </div>
 </template>
 
 <script>
@@ -111,7 +111,7 @@ export default {
 .wrapp{
     width: 90%;
     margin-left: 5%;
-    margin-top: 5%;  
+    margin-top: 15%;  
     margin-bottom: 5%;  
 }
 </style>

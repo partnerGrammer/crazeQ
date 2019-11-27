@@ -53,7 +53,7 @@
             <img src="~assets/home.png" class="imagen">
         </q-btn>
         <q-btn flat class="caja"  to="/closet" >
-            <img src="~assets/gancho.png" class="imagen" >
+            <img src="~assets/gancho.png" class="gancho" >
         </q-btn>
         <q-btn flat class="caja"  to="/map" >
             <img src="~assets/tiendas.png" class="imagen" >
@@ -70,6 +70,7 @@
     </q-page-container>
   </q-layout>
 </template>
+
 
 <script>
 export default {
@@ -114,19 +115,43 @@ width:8vw; height: 4vh;
 .tipo{
   height:8%;
 }
+.gancho{
+  height:8vw;
+  height: 4vh;
+}
+}
+@media screen and (min-width: 350px) and (max-width: 750px) {
+     .caja{
+  margin-top: 2%;
+  margin-bottom: 3%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+.imagen{
+width:8vw; height: 4vh;
+}
+.tipo{
+  height:7%;
+}
+.gancho{
+  height: 4vh;
+}
 }
 @media screen and (min-width: 750px) and (max-width: 1550px) {
      .caja{
   margin-top: 1%;
   margin-bottom: 3%;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 .imagen{
-width:7vw; height: 8vh;
+height: 6vh;
+}
+.gancho{
+  height:8vw;
 }
 .tipo{
-  height:12%;
+  height:8%;
 }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-<div style="height: 90%;">
-             <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%;"/>
+<div style="height: 90%; position:absolute;">
+             <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%; top:3%;"/>
              <div class="text-h5" style="margin-top:5%;margin-left:5%;">Prendas que te gustan</div>  
               <hr style="margin-top:5%;">
     <div class="contenedor">            
@@ -12,7 +12,7 @@
                                     once
                                     transition="scale"
                                   >
-                                  <div class="row" style="margin-top:-1vh; margin-bottom:-10%;">
+                                  <div class="row">
                                     <!-- <div class="col-6"><img :src="post.url" style="width:33vw; "></div> -->
                                      <q-btn flat class="caja"  to="/details" >
                                      <q-img
@@ -22,6 +22,7 @@
                                       style="width:43vw;"
                                     >
                                     </q-img>
+                                    <div class="text">Descripcion</div>
                                     </q-btn>
                                     
                                     <q-space />
@@ -34,6 +35,7 @@
                                       style="width:43vw;"
                                     >
                                     </q-img>
+                                    <div class="text">Descripcion</div>
                                     </q-btn>
                                   </div>
                                       
@@ -71,7 +73,7 @@ export default {
 .contenedor{
     margin-left:   15%;
     margin-right:  15%;
-    
+    margin-bottom: 5%;
+    margin-top: 5%;    
 }
-
 </style>

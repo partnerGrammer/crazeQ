@@ -1,5 +1,5 @@
 <template>
-    <div style=" width:100%; position: absolute;" >
+    <div style=" width:100%; position: fixed;" >
         <q-option-group
         v-model="panel"
         inline
@@ -14,7 +14,7 @@
 
 
 
-      <q-tab-panels v-model="panel" animated class="shadow-2 rounded-borders con-estilo" style="width:100%; margin-left:1%;">
+      <q-tab-panels v-model="panel" animated class="shadow-2 rounded-borders con-estilo" style="width:100%;">
         <q-tab-panel name="Mapa" >
 
 
@@ -22,7 +22,7 @@
   :center="{lat:28.674598, lng:-106.079639}"
   :zoom="19"
   map-type-id="terrain"
-  style="width: 100%; height: 85vh;"
+  style="width: 100%; height: 83vh;"
 >
  <gmap-custom-marker :marker="marker">
     <img src="../assets/marcador.png" style="width:8vw;" @click="icon = true"/>
@@ -32,8 +32,8 @@
 
 <!-- Seccion modal del mapa -->
         <q-dialog v-model="icon" transition-show="flip-down" transition-hide="flip-up" class="con-estilo">
-      <q-card>
-        <q-card-section >
+      <q-card style=" width:95%; position: fixed;">
+        <q-card-section  style=" width:100%;" >
           <div class="row">
 
             <div class="col-2">
@@ -73,7 +73,7 @@
          <!-- Fin del top con la descripcion del modal -->
         <q-card-section>
         
-    <div class="q-gutter-y-md" style="max-width: 90vw; width: 90vw">
+    <div class="q-gutter-y-md">
       <q-option-group
         v-model="panel2"
         inline
@@ -84,7 +84,7 @@
         style="margin-bottom:-3%;margin-top:-3%;"
       />
 
-      <q-tab-panels v-model="panel2" animated class="shadow-2 rounded-borders" style="width: 78vw;">
+      <q-tab-panels v-model="panel2" animated class="shadow-2 rounded-borders" style="width: 100%;">
         <q-tab-panel name="mails" >
 
           <div class="text-h6" >Calificaciones</div>
@@ -134,25 +134,28 @@
                                     class="example-item"
                                     style=""
                                   >
-                                  <div class="row" style="margin-top:2vh;">
+                                  <div class="row" style="margin-top:3vh;">
                                     <!-- <div class="col-6"><img :src="post.url" style="width:33vw; "></div> -->
                                     <q-img
                                       :src="post.url"
                                       spinner-color="white"
                                       class="rounded-borders"
-                                      style="width:33vw;"
+                                      style="width:37vw;"
                                       @click=myFunction();
                                     >
+                                    <div class="text" style="width:100%; text-align:center;">Descripcion</div>
                                     </q-img>
+                                    
                                     <q-space />
                                     <!-- <div class="col-6"><img :src="post.url" style="width:33vw; margin-left:7%;"></div> -->
                                     <q-img
                                       :src="post.url"
                                       spinner-color="white"
                                       class="rounded-borders"
-                                      style="width:33vw;"
+                                      style="width:37vw;"
                                       @click=myFunction();
                                     >
+                                    <div class="text" style="width:100%; text-align:center;">Descripcion</div>
                                     </q-img>
                                   </div>
                                       
@@ -278,11 +281,12 @@ export default {
 }
 </script>
 <style>
-.con-estilo{
+/* .con-estilo{
   background-color: white;
   width:100%;
   height: 100%;
-}
+  position: relative;
+} */
 </style>
 
 <style>

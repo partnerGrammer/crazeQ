@@ -67,7 +67,7 @@ data() {
       this.error = ''
       console.log('dentro del motodo')
       firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user =>{
-        this.$router.push({name:'slider'})
+        this.$router.push({name:'conf'})
         console.log('acceso satisfactorio')
       }).catch(err =>{
         this.error = err.message
