@@ -1,17 +1,18 @@
     <template>
       <div class="personal">
-          
+          <q-btn color="primary" icon="check" label="ByPass" to="/slider" />
           <div class="row">
-<div class="col"> <q-btn push   rounded color="black"  class="full-width" to="/register" label="Registro"/> </div>
-<div class="col"> <q-btn flat   rounded color="black" disable class="full-width" label="Estas en: Login" /> </div>
+            <div class="col" style="text-align:center;"> <q-btn flat disable class="full-width texto" style="margin-bottom:-8%;" label="Iniciar sesión" /><br> 
+          <img src="../assets/separador.png" style="width:80%;"> </div>
+            <div class="col" style="text-align:center;"> <q-btn flat class="full-width texto" to="/register" label="Registrarse"/> </div>
+
 
           </div>
-<div class="text-h4" style="text-align:center; margin-top:10vh;">Iniciar sesión</div>
     <q-form
       @submit="onSubmit"
       @reset="onReset"
       class="q-gutter-md"
-      style="margin-top:10vw;"
+      style="margin-top:5vw;"
     >
       <q-input
         filled
@@ -25,23 +26,23 @@
 
       <q-input
         filled
+        hint="Password"
         type="password"
         v-model="password"
         label="Your password *"
         autocomplete="on"
       />
 
-        <div style="text-align: center;">
+        <div style="text-align: center; margin-top:20%;">
         <q-btn color="black" class="full-width" label="Ingresar" type="submit" />
-        <q-btn label="Reset" type="reset" color="black" class="full-width" style="margin-top:5%;"/><br>
         <!-- <q-btn type="reset" color="black" class="full-width" label="Limpiar" /> -->
-        <img src="../assets/separador.png" style="width:50%; margin-top:5%;"> <br>
-        <img src="../assets/google.png" style="width:10%; margin-top:5%; margin-right:5%;">
-        <img src="../assets/facebook.png" style="width:10%; margin-top:5%;">
+        <img src="../assets/separador.png" style="width:50%; margin-top:15%;"> <br>
+        <img src="../assets/google.png" @click=socialLogin() style="width:10%; margin-top:5%; margin-right:5%;">
+        <img src="../assets/facebook.png" @click=advice() style="width:10%; margin-top:5%;">
 
       </div>
     </q-form>
-<div class="text-h5" v-if="acceso=='true'"> Accesando...</div>
+
   </div>
     </template>
    
@@ -64,6 +65,9 @@ data() {
     }
   },
   methods:{
+    advice(){
+      alert("Click hacia redes sociales")
+    },
     onSubmit(){
       this.error = ''
       console.log('dentro del motodo')
@@ -75,6 +79,15 @@ data() {
         this.error = err.message
       })
     },
+     async socialLogin(){
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider).then((result)=>{
+        this.$router.push('slider');
+      }).catch(err =>{
+        this.error = err.message
+        alert('Error de la clase: '+this.error)
+      })
+    },
      onReset () {
       this.email = null
       this.password = null
@@ -84,8 +97,19 @@ data() {
 </script>
 <style>
 .personal{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 5%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 35%;
 }
+
+@media screen and (min-width: 150px) and (max-width: 330px) {
+        .personal{
+    width: 75%;
+    margin-left: 12.5%;
+    margin-top: 15%;
+}
+      .texto {
+        font-size: 12px;
+      }
+    }
 </style>

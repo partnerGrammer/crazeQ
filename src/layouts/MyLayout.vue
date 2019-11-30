@@ -1,7 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
    
-<q-footer reveal persistent class="tipo">
+<q-footer reveal persistent class="tipo" style="border-top:1px;
+  border-top:solid ;">
   
         <q-tabs
          v-model="tab"
@@ -88,7 +89,7 @@ export default {
 }
 </script>
 <style>
-.caja{
+.caja{  
   margin-top: 3%;
   margin-bottom: 5%;
   margin-left: 5%;
@@ -120,7 +121,7 @@ width:8vw; height: 4vh;
   height: 4vh;
 }
 }
-@media screen and (min-width: 350px) and (max-width: 750px) {
+@media screen and (min-width: 350px) and (max-width: 650px) {
      .caja{
   margin-top: 2%;
   margin-bottom: 3%;
@@ -137,7 +138,7 @@ width:8vw; height: 4vh;
   height: 4vh;
 }
 }
-@media screen and (min-width: 750px) and (max-width: 1550px) {
+@media screen and (min-width: 650px) and (max-width: 1550px) {
      .caja{
   margin-top: 1%;
   margin-bottom: 3%;
@@ -151,7 +152,7 @@ height: 6vh;
   height:8vw;
 }
 .tipo{
-  height:8%;
+  height:9%;
 }
 }
 </style>

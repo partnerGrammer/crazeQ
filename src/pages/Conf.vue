@@ -3,7 +3,7 @@
       <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; margin-top:5%;"/>
     <div class="q-gutter-sm" style="margin-top:5%;">        
     <q-list>
-    <h4 style="margin-top:-2%;">Filtros</h4>
+    <h4 style="margin-top:-2%;">Filtros </h4>
       <q-item tag="label" v-ripple style="margin-top:-16%;">
         <q-item-section avatar>
           <q-checkbox v-model="color" val="Vestidos" color="black" />
@@ -112,12 +112,15 @@
       color="black"
     />
     <q-btn color="black" class="full-width" label="Aplicar" type="submit" style="margin-top:5%;"/>
-    <q-btn color="red" class="full-width" label="Cerrar sesion" to="/" style="margin-top:5%;"/>
+    <q-btn color="red" class="full-width" label="Cerrar sesion" @click="logout()" style="margin-top:5%;"/>
   </div>
   </div>
 </template>
 <script>
+import db from '../firebase/init'
+import firebase from 'firebase'
 export default {
+  
   data () {
     return {
       color: [],
@@ -125,6 +128,17 @@ export default {
         min: 0,
         max: 50
       }
+    }
+  },
+  methods:{
+    logout(){
+      firebase.auth().signOut().then((result)=>{
+        alert("Cerro su sesión")
+        this.$router.push('/');
+
+}).catch(function(error) {
+  // An error happened.
+});
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-<div style="height: 100%; position:absolute;">
+<div style="height: 100%; width:100%; position:absolute;">
              <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%; top:3%;"/>
              <div class="text-h5" style="margin-top:5%;margin-left:5%;">Prendas que te gustan</div>  
               <hr style="margin-top:5%;">
@@ -12,7 +12,7 @@
                        <q-img
                          :src="post.url"
                          spinner-color="white"
-                         class="rounded-borders imagencloseth"
+                         class="rounded-borders imagencloseth animated rotateInDownLeft delay-5s"
                          
                          to="/details"
                        >
@@ -28,7 +28,9 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { db } from '../firebase/init'
+import firebase from 'firebase'
+let database = firebase.firestore();
 export default {
   name: 'PageIndex',
   data(){
@@ -44,13 +46,24 @@ export default {
 }},
    created(){
 
-     axios.get("https://backend-app-laravel.herokuapp.com/api/getGallery").then(response=>{
-     this.posts = response.data;
-     this.post = response.data[0];
-     console.log(response); 
-     })
+    //  axios.get("https://backend-app-laravel.herokuapp.com/api/getGallery").then(response=>{
+    //  this.posts = response.data;
+    //  this.post = response.data[0];
+    //  console.log(response); 
+    //  })
         
-  }
+  },
+  mounted() {
+        //Obtenemos a los usuario
+        db.collection('Craze').onSnapshot(response => {
+            this.posts = [];
+        
+            response.forEach(doc => {
+                this.posts.push(doc.data())
+                console.log(this.posts)
+                  
+            })
+        })},
   }
  
 </script>

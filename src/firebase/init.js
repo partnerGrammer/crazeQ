@@ -21,5 +21,5 @@ var firebaseConfig = {
     const db = firebase.firestore()
     const storage = firebase.storage()
     const functions = firebase.functions()
-
   export { firebase, auth, db, storage, functions }
+ 

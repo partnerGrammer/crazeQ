@@ -1,9 +1,9 @@
 <template>
   <q-layout style="position: fixed;">
     <q-page-container class="fondo" >
-      <q-page>
+      <q-page v-if="posts.length != 0">
       
-      <q-slide-item @left="onLeft" @right="onRight" @action="cambio" left-color="pink-2" right-color="pink-2" ref="elemento">
+      <q-slide-item @left="onLeft" @right="onRight" left-color="pink-2" right-color="pink-2" ref="elemento">
         <template v-slot:left>
           <img src="../assets/dislike.png" class="boton"> 
         </template>
@@ -11,8 +11,8 @@
           <img src="../assets/like.png" class="boton">
         </template>
         <q-item class="fondo">
-          <q-card  class="my-card altura animated flipInX delay-5s"  >
-            <img id="animated" :src="posts[0].url" class="" style="width:100%; height:100%;"  >
+          <q-card class="my-card altura">
+            <img :src="post.url" >
           </q-card>
         </q-item>
               
@@ -30,9 +30,6 @@
 </template>
 
 <script>
-import { db } from '../firebase/init'
-import firebase from 'firebase'
-let database = firebase.firestore();
 import axios from 'axios';
 export default {
   name: 'PageIndex',
@@ -43,29 +40,19 @@ export default {
     }
   },
    created(){
-    // const element =  document.getElementById('animated')
-    // element.addEventListener('animationend', function() { 
-    //   element.classList.remove('animated fadeInDown delay-5s')    
-    //    })
+
+     axios.get("https://backend-app-laravel.herokuapp.com/api/getGallery").then(response=>{
+     this.posts = response.data;
+     this.post = response.data[0];
+     console.log(response); 
+     })
         
   },
-   mounted() {
-        //Obtenemos a los usuario
-        db.collection('Craze').onSnapshot(response => {
-            this.posts = [];
-        
-            response.forEach(doc => {
-                this.posts.push(doc.data())
-                console.log(this.posts)
-                  
-            })
-        })},
   methods:{
     onLeft: function(){
       this.posts.splice(0,1);
       this.post=this.posts[0];
-      this.$refs.elemento.reset(); 
-       
+      this.$refs.elemento.reset();
     },
 
     onRight: function(){
@@ -118,10 +105,10 @@ export default {
     }
   @media screen and (min-width: 650px) and (max-width: 1350px) {
       #like{
-        width:10%;
+        width:15%;
       }
       #dislike{
-        width:10%;
+        width:15%;
         margin-left:10%;
       }
       .boton{
