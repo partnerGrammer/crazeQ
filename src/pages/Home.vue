@@ -1,7 +1,7 @@
 <template>
 
-  <q-layout>      
-     <q-page-container class="history">
+  <q-layout >      
+     <q-page-container class="history animated fadeIn delay-5s">
       <q-page style="">
        <div v-if="show" id="salida" style="text-align: center; position: absolute; top: 45%; width: 100%;"  class="animated fadeInDown delay-5s">
                 <img  src="../assets/logocraze.png" style="width:220px;"><br>                                 

@@ -15,7 +15,7 @@ const routes = [
     component: () => import('pages/login.vue'),
   },  
   {
-    path: '/details',
+    path: '/details/:idCategory',
     name: 'details',
     component: () => import('layouts/MyLayout.vue'),
     children: [
@@ -27,7 +27,7 @@ const routes = [
     name: 'map',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/modal2.vue') }
+      { path: '', component: () => import('pages/Mapa.vue') }
     ]
   },
   {
@@ -37,15 +37,7 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Closet.vue') }
     ]
-  },
-  {
-    path: '/modal',
-    name: 'modal',
-    component: () => import('layouts/MyLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/modal2.vue') }
-    ]
-  },
+  },  
   {
     path: '/conf',
     name: 'conf',
@@ -53,10 +45,6 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Conf.vue') }
     ]
-    ,
-    meta:{
-      requiresAuth : true
-    }
   },
   {
     path: '/register',
@@ -64,61 +52,15 @@ const routes = [
     component: () => import('pages/register.vue'),
   },  
   {
-    path: '/conf2',
-    name: 'conf2',
-    component: () => import('layouts/MyLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Conf2.vue') }
-    ]
-  },
-  {
     path: '/slider',
     name: 'slider',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
-    ],
-    meta:{
-      requiresAuth : true
-    }
-  }
-  ,
-  {
-    path: '/slider2',
-    name: 'slider2',
-    component: () => import('layouts/MyLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/Index2.vue') }
-    ],
-    meta:{
-      requiresAuth : true
-    }
-  }
-  
+      { path: '', component: () => import('pages/Slider.vue') }
+    ]
+  }   
 ]
 
-const router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
-  
 
-router.beforeEach((to, from, next) => {
-  // to and from are both route objects. must call `next`.
-  if(to.matched.some(ruta => ruta.meta.requiresAuth)){
-  let user = firebase.auth.currentUser;
-  if(user){
-    next();
-  }else{
-    next({
-      name: 'login'
-    })
-  }
-  }else{
-    next();
-  }
-  
-})
 
 export default routes

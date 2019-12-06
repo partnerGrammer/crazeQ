@@ -1,6 +1,6 @@
     <template>
       <div class="personal">
-          
+          <!-- <q-btn color="primary" icon="check" label="ByPass" to="/slider" /> -->
           <div class="row">
           <div class="col" style="text-align:center;"> <q-btn flat to="/login" class="full-width texto" label="Iniciar sesión" /> 
           </div>
@@ -50,8 +50,9 @@
    
     
 <script>
-import db from '../firebase/init'
+// import db from '../firebase/init'
 import firebase from 'firebase'
+import { db } from '../firebase/init'
 export default {
 name:'modal',
 
@@ -61,16 +62,14 @@ data() {
        icon: false,  
        user:'',   
        name:'',
+       time:'',
        email:'',
        password:'',
        error:''
     }
-  },
-  methods:{
-    
-    advice(){
-      alert("Click hacia redes sociales")
-    },
+  },  
+  methods:{   
+   
     async socialLogin(){
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then((result)=>{
@@ -84,12 +83,14 @@ data() {
       this.error = ''
       console.log('dentro del motodo')
       firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(user =>{
-        this.name = ''
+         let addDoc = db.collection('tabla:Usuario').add({
+        email: this.email,
+        password: this.password,
+         })
         this.email = ''
         this.password = ''
         alert('Registro satisfactorio')
-        console.log('Usuario creado con exito'+ email)
-        console.log(user)
+        this.$router.push({path: 'slider'})
       }).catch(err =>{
         this.error = err.message
       })

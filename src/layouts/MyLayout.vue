@@ -1,8 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
    
-<q-footer reveal persistent class="tipo" style="border-top:1px;
-  border-top:solid ;">
+<q-footer reveal persistent class="tipo" >
   
         <q-tabs
          v-model="tab"
@@ -94,6 +93,7 @@ export default {
   margin-bottom: 5%;
   margin-left: 5%;
   margin-right: 4%;
+  
   width:25%;
 }
 .imagen{
@@ -115,6 +115,9 @@ width:8vw; height: 4vh;
 }
 .tipo{
   height:8%;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 .gancho{
   height:8vw;
@@ -133,6 +136,9 @@ width:8vw; height: 4vh;
 }
 .tipo{
   height:7%;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 .gancho{
   height: 4vh;
@@ -153,6 +159,9 @@ height: 6vh;
 }
 .tipo{
   height:9%;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 }
 </style>

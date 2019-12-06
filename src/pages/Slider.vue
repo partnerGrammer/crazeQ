@@ -1,19 +1,23 @@
 <template>
   <q-layout style="position: fixed;">
-    <q-page-container class="fondo" >
+    <q-page-container id='contenedor' class="fondo" >
       <q-page>
       
-      <q-slide-item @left="onLeft" @right="onRight" @action="cambio" left-color="pink-2" right-color="pink-2" ref="elemento">
+      <q-slide-item @left="onLeft" @right="onRight"  left-color="pink-2" right-color="pink-2" ref="elemento">
         <template v-slot:left>
           <img src="../assets/dislike.png" class="boton"> 
         </template>
         <template v-slot:right>
           <img src="../assets/like.png" class="boton">
         </template>
-        <q-item class="fondo">
-          <q-card  class="my-card altura animated flipInX delay-5s"  >
-            <img id="animated" :src="posts[0].url" class="" style="width:100%; height:100%;"  >
-          </q-card>
+        <q-item class="fondo">     
+            <q-btn @click="details()"  class="altura" >
+              <q-card   class="altura animated flipInY delay-5s" >
+            <img :src="posts[0].img" class="" style="width:100%; height:100%;">
+             </q-card>
+        </q-btn>
+            
+         
         </q-item>
               
       </q-slide-item>
@@ -31,47 +35,57 @@
 
 <script>
 import { db } from '../firebase/init'
-import firebase from 'firebase'
+import firebase, { functions } from 'firebase'
 let database = firebase.firestore();
 import axios from 'axios';
 export default {
   name: 'PageIndex',
   data(){
-    return{
+    return{     
         posts: [],
         post: ''
     }
   },
-   created(){
-    // const element =  document.getElementById('animated')
-    // element.addEventListener('animationend', function() { 
-    //   element.classList.remove('animated fadeInDown delay-5s')    
-    //    })
-        
+  created(){              
+   
   },
    mounted() {
-        //Obtenemos a los usuario
-        db.collection('Craze').onSnapshot(response => {
-            this.posts = [];
-        
+     var user = firebase.auth().currentUser;
+     if (user != null) {
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}else{
+  this.$router.push({path: 'login'})
+}
+        db.collection('tabla:Productos').onSnapshot(response => {
+            this.posts = [];        
             response.forEach(doc => {
-                this.posts.push(doc.data())
+                this.posts.push(doc.data(),doc.id)
                 console.log(this.posts)
                   
             })
         })},
-  methods:{
+  methods:{    
     onLeft: function(){
       this.posts.splice(0,1);
       this.post=this.posts[0];
       this.$refs.elemento.reset(); 
        
-    },
+    },   
 
     onRight: function(){
       this.posts.splice(0,1);
       this.post=this.posts[0];
       this.$refs.elemento.reset();
+    },
+    details: function(){
+      this.$router.push({ path: `/details/${this.posts[1]}` }) 
+      // router.push({ path: 'details', query: { idCategory: '1' } })
     }
   }
 }

@@ -1,18 +1,18 @@
 <template>
-<div style="height: 100%; width:100%; position:absolute;">
+<div style="height: 90%; width:100%; position:absolute;">
              <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%; top:3%;"/>
              <div class="text-h5" style="margin-top:5%;margin-left:5%;">Prendas que te gustan</div>  
               <hr style="margin-top:5%;">
          
           
           <!-- Inicio segunda lista -->
-            <div class="row q-col-gutter-x-xs q-col-gutter-y-lg" style="margin-bottom:15%;">
+            <div class="row q-col-gutter-x-xs q-col-gutter-y-lg" style="margin-bottom:20%;">
                     <q-btn flat v-for="post in posts"
-                       :key="post" to="/details" class="contenedor">
+                       :key="post" @click="details()" class="contenedor">
                        <q-img
-                         :src="post.url"
+                         :src="post.img"
                          spinner-color="white"
-                         class="rounded-borders imagencloseth animated rotateInDownLeft delay-5s"
+                         class="rounded-borders imagencloseth animated flipInY delay-5s"
                          
                          to="/details"
                        >
@@ -41,9 +41,11 @@ export default {
   },
   
     methods:{
-      myFunction(){
-  // alert('Detalles');
-}},
+    details: function(){
+      this.$router.push({ path: `/details/${this.posts[1]}` }) 
+      // router.push({ path: 'details', query: { idCategory: '1' } })
+    }
+},
    created(){
 
     //  axios.get("https://backend-app-laravel.herokuapp.com/api/getGallery").then(response=>{
@@ -54,12 +56,24 @@ export default {
         
   },
   mounted() {
+     var user = firebase.auth().currentUser;
+     if (user != null) {
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}else{
+  this.$router.push({path: 'login'})
+}
         //Obtenemos a los usuario
-        db.collection('Craze').onSnapshot(response => {
+        db.collection('tabla:Productos').onSnapshot(response => {
             this.posts = [];
         
             response.forEach(doc => {
-                this.posts.push(doc.data())
+                this.posts.push(doc.data(),doc.id)
                 console.log(this.posts)
                   
             })
@@ -80,6 +94,9 @@ export default {
       .imagencloseth{
         width:    40vw;
         height:   100%;
+        -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
       }
       }
        @media screen and (min-width: 400px) and (max-width: 1400px) {
@@ -93,6 +110,9 @@ export default {
       .imagencloseth{
         width:    40vw;
         height:   100%;
+        -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
       }
       }
 

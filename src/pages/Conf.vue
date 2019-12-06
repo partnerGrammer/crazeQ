@@ -1,10 +1,10 @@
 <template>
-  <div style="width:90%; margin-left:5%; margin-right:5%;">
+  <div class="animated fadeIn delay-5s" style="width:90%; margin-left:5%; margin-right:5%;">
       <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; margin-top:5%;"/>
     <div class="q-gutter-sm" style="margin-top:5%;">        
     <q-list>
     <h4 style="margin-top:-2%;">Filtros </h4>
-      <q-item tag="label" v-ripple style="margin-top:-16%;">
+      <q-item tag="label" v-ripple style="margin-top:-14%;">
         <q-item-section avatar>
           <q-checkbox v-model="color" val="Vestidos" color="black" />
         </q-item-section>
@@ -139,7 +139,25 @@ export default {
 }).catch(function(error) {
   // An error happened.
 });
-    }
+    },
+    
+    
+  },
+  mounted(){
+    
+ var user = firebase.auth().currentUser;
+     if (user != null) {
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}else{
+  this.$router.push({path: 'login'})
+}
+
   }
 }
 </script>

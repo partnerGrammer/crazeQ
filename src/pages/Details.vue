@@ -1,24 +1,19 @@
 <template>
-<div style="height: 90%; width:100%; position:absolute;">
+<div class="animated slideInDown delay-1s" style="height: 90%; width:100%; position:absolute;">
              <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%; top:2%;"/>
          
-      <div class="wrapp"  > 
+      <div class="wrapp" style="margin-bottom:12%;" > 
         
           <q-card class="my-card" >    
                    
-            <q-img
-            src="https://vignette.wikia.nocookie.net/nickelodeon/images/e/ed/14909590588313-0.jpg/revision/latest?cb=20181018231543"
-            spinner-color="white"
-            style="height:65vh;"
-            :ratio="4/3"
-            />
+            <img class="sombra" :src="posts[0].img" alt="">
           </q-card><br>
          
            <div class="row">
-                <p class="text-weight-light">SUÉTER DE CORTE ASIMÉTRICO</p>                
+                <p class="text-weight-light">{{posts[0].name}}</p>                
             </div>
            <div class="row">
-               <p style="font-size:25px;">$123.00</p>
+               <p style="font-size:25px;">$ {{posts[0].price}}</p>
                 <q-space />
                            
                <img src="../assets/icono1.png" style="width:9%; height:5%; margin-right:5%;"> 
@@ -45,9 +40,7 @@
       >
         <q-card>
           <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-            commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
+            {{posts[0].description}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -58,9 +51,7 @@
       >
         <q-card>
           <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-            commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
+             {{posts[0].stock}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -71,9 +62,7 @@
       >
         <q-card>
           <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-            commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
+            {{boutiquesposts[0].address}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -90,19 +79,74 @@
 
 <script>
 import axios from 'axios';
+import { db } from '../firebase/init'
+import firebase, { functions } from 'firebase'
+let database = firebase.firestore();
 export default {
   name: 'PageIndex',
   data(){
     return{
         posts: [],
+        boutiquesposts: [],
+        id:'',
         post: ''
     }
   },
-  async mounted(){
-   
-  },
   methods:{
   
+  },
+    mounted() {
+     var user = firebase.auth().currentUser;
+     if (user != null) {
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}else{
+  this.$router.push({path: 'login'})
+  }       
+  // traer detalles de la prenda
+        let productos = db.collection('tabla:Productos');
+        let queryRef = productos.where('id', '==', this.id).get()
+              .then(snapshot => {
+                if (snapshot.empty) {
+                  console.log('No matching documents.');
+                  return;
+                }
+                snapshot.forEach(doc => {
+                  console.log(doc.id, '=>', doc.data());
+                  this.posts.push(doc.data())
+                  console.log(this.posts)                  
+                });
+              })
+              .catch(err => {
+                console.log('Error getting documents', err);
+              })        
+
+              // traer detalles de la prenda
+        let boutiques = db.collection('tabla:Boutique');
+        let queryRef2 = boutiques.where('idBoutique', '==', this.id).get()
+              .then(snapshot => {
+                if (snapshot.empty) {
+                  console.log('No matching documents2.');
+                  return;
+                }
+                snapshot.forEach(doc => {
+                  console.log(doc.id, '=>', doc.data());
+                  this.boutiquesposts.push(doc.data())
+                  console.log(this.boutiquesposts)                  
+                });
+              })
+              .catch(err => {
+                console.log('Error getting documents', err);
+              })   
+        },
+  created(){
+    this.id = this.$route.params.idCategory;
+    console.log(this.id)
   }
 }
 </script>
@@ -113,5 +157,10 @@ export default {
     margin-left: 5%;
     margin-top: 15%;  
     margin-bottom: 5%;  
+}
+.sombra{
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 </style>

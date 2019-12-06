@@ -1,6 +1,6 @@
     <template>
       <div class="personal">
-          <q-btn color="primary" icon="check" label="ByPass" to="/slider" />
+          <!-- <q-btn color="primary" icon="check" label="ByPass" to="/slider" /> -->
           <div class="row">
             <div class="col" style="text-align:center;"> <q-btn flat disable class="full-width texto" style="margin-bottom:-8%;" label="Iniciar sesión" /><br> 
           <img src="../assets/separador.png" style="width:80%;"> </div>
@@ -64,6 +64,30 @@ data() {
        acceso: 'false'
     }
   },
+ mounted(){
+    var user = firebase.auth().currentUser;
+     if (user != null) {
+       console.log('Si esta autentificado'+user)
+  user.providerData.forEach(function (profile) {
+    this.$router.go({path: 'slider'})
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}else{
+  // this.$router.push({path: 'login'})
+}
+    
+//  var user = firebase.auth().currentUser;
+//      if (user != null) { 
+//         console.log('Si esta autentificado')
+//         router.push({path: 'conf'})
+//           }else{
+//           console.log('no esta autentificado')
+//         }
+  },
   methods:{
     advice(){
       alert("Click hacia redes sociales")
@@ -71,18 +95,32 @@ data() {
     onSubmit(){
       this.error = ''
       console.log('dentro del motodo')
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user =>{        
-        this.$router.push({name:'slider'})
-        alert('Acceso conseguido')
+        this.$router.push({path: 'slider'})
+        // alert('Acceso conseguido')
         console.log('acceso satisfactorio')
       }).catch(err =>{
         this.error = err.message
       })
     },
+    // onSubmit(){
+    //   this.error = ''
+    //   console.log('dentro del motodo')
+    //   firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(user =>{        
+    //     this.$router.push({path: 'slider'})
+    //     // alert('Acceso conseguido')
+    //     console.log('acceso satisfactorio')
+    //   }).catch(err =>{
+    //     this.error = err.message
+    //   })
+    // },
      async socialLogin(){
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithPopup(provider).then((result)=>{
-        this.$router.push('slider');
+        //  this.$router.push({name:'slider'})
+              // router.remplace({name:'slider'})
+       this.$router.push({path: 'slider'})
       }).catch(err =>{
         this.error = err.message
         alert('Error de la clase: '+this.error)
