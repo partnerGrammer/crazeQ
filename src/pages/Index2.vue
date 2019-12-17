@@ -49,7 +49,7 @@ data() {
   },
   mounted() {
         //Obtenemos a los usuario
-        db.collection('Craze').onSnapshot(response => {
+        db.collection('tabla:Productos').onSnapshot(response => {
             this.usuarios = [];
             response.forEach(doc => {
                 this.usuarios.push(doc.data())
@@ -69,7 +69,7 @@ data() {
      onReset () {
     },
     crearNuevoDocumento(){
-      let addDoc = db.collection('Craze').add({
+      let addDoc = db.collection('tabla:Productos').add({
         name: this.name,
         url: this.url
       }).then(ref => {

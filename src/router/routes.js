@@ -58,6 +58,14 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Slider.vue') }
     ]
+  },  
+  {
+    path: '/subir',
+    name: 'subir',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/index2.vue') }
+    ]
   }   
 ]
 

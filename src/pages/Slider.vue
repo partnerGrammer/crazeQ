@@ -23,8 +23,8 @@
       </q-slide-item>
 
       <div style="text-align:center;">
-      <img id="like" src="../assets/like.png" @click="onLeft"> 
-      <img id="dislike" src="../assets/dislike.png" @click="onRight">
+      <img id="like" src="../assets/like.png" @click="createLike"> 
+      <img id="dislike" src="../assets/dislike.png" @click="createDislike">
       </div>
 
     </q-page>
@@ -51,6 +51,7 @@ export default {
   },
    mounted() {
      var user = firebase.auth().currentUser;
+     console.log(user.uid)
      if (user != null) {
   user.providerData.forEach(function (profile) {
     console.log("Sign-in provider: " + profile.providerId);
@@ -71,22 +72,43 @@ export default {
             })
         })},
   methods:{    
-    onLeft: function(){
-      this.posts.splice(0,1);
+    onLeft: function(){      
+      this.posts.splice(0,2);
       this.post=this.posts[0];
       this.$refs.elemento.reset(); 
-       
+      
     },   
 
-    onRight: function(){
-      this.posts.splice(0,1);
+    onRight: function(){      
+      this.posts.splice(0,2);
       this.post=this.posts[0];
       this.$refs.elemento.reset();
+      
     },
     details: function(){
       this.$router.push({ path: `/details/${this.posts[1]}` }) 
       // router.push({ path: 'details', query: { idCategory: '1' } })
-    }
+    },
+    createLike: function(){     
+      let userid =  firebase.auth().currentUser.uid;
+      db.collection('tabla:Likes').doc(userid).set({
+        arrayLikes:     [this.posts[0].id,1],
+        arrayTotal:     [this.posts[0].id],
+      }).then(ref => {
+        console.log('Added document with ID: ', ref.id);
+      });
+    },
+    createDislike: function(){     
+            let userid =  firebase.auth().currentUser.uid;
+      db.collection('tabla:Likes').doc(userid).set({      
+        arrayDislikes:  [this.posts[0].id],
+        arrayTotal:     [this.posts[0].id],
+      }).then(ref => {
+        console.log('Added document with ID: ', ref.id);
+      });
+    let cityRef = db.collection('tabla:Likes').doc(userid);
+    let updateSingle = cityRef.update({capital: true});
+   } //    Fin Dislike
   }
 }
 </script>
