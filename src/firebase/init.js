@@ -6,14 +6,14 @@ require('firebase/storage')
 require('firebase/functions')
 
 var firebaseConfig = {
-    apiKey: "AIzaSyAXJ748gJgKC1O66r1rraIhMHixIBe8VnI",
-    authDomain: "testdiegofirebaseyvuejs.firebaseapp.com",
-    databaseURL: "https://testdiegofirebaseyvuejs.firebaseio.com",
-    projectId: "testdiegofirebaseyvuejs",
-    storageBucket: "testdiegofirebaseyvuejs.appspot.com",
-    messagingSenderId: "902674652341",
-    appId: "1:902674652341:web:9039351a07c8ef552a72fc",
-    measurementId: "G-DZ85B0YF1G"
+  apiKey: "AIzaSyB-Y8DHYC5ki4EKBojAfalAGYFPCuHaAFU",
+  authDomain: "craze-71d6b.firebaseapp.com",
+  databaseURL: "https://craze-71d6b.firebaseio.com",
+  projectId: "craze-71d6b",
+  storageBucket: "craze-71d6b.appspot.com",
+  messagingSenderId: "999017124538",
+  appId: "1:999017124538:web:524a9bb2cad04380d72883",
+  measurementId: "G-TCL8FH6GTW"
   };
   // Initialize Firebase
     firebase.initializeApp(firebaseConfig);

@@ -83,7 +83,7 @@ data() {
       this.error = ''
       console.log('dentro del motodo')
       firebase.auth().createUserWithEmailAndPassword(this.email,this.password).then(user =>{
-         let addDoc = db.collection('tabla:Usuario').add({
+         let addDoc = db.collection('usuarios').add({
         email: this.email,
         password: this.password,
          })

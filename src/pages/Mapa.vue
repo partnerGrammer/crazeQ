@@ -39,13 +39,14 @@
          <HelloWorld v-if="icon2" v-model="icon2"/>
         <q-item-section avatar>
           <q-avatar rounded>
-            <img :src="post.img" class="" style="width:100%;">
+            <img :src="post.logo" class="" style="width:100%;">
           </q-avatar>
         </q-item-section>
        
                                       <q-item-section style="padding-right:10px;">
-                                        <q-item-label>Address:  {{ post.address }}</q-item-label>
-                                        <q-item-label>Email:    {{ post.email }}</q-item-label>
+                                        <q-item-label>Direccion:  {{ post.direccion }}</q-item-label>
+                                        <q-item-label>Nombre:    {{ post.nombre }}</q-item-label>
+                                        <q-item-label>Telefono:    {{ post.telefono }}</q-item-label>
                                         <!-- inicio estrellas -->
 
                                       
@@ -91,27 +92,9 @@ export default {
     created(){
 
   },
-  async mounted() {    
-       
-      db.collection('roles').where('movieId', '==', 'fight club').onSnapshot(response =>{
-      this.posts3 = [];        
-             response.forEach(doc3 => {
-                 this.posts3.push(doc3.data())
-                console.log(doc3.data())  
-                console.log(doc3.data().actorId)
-
-                db.collection('actors').where('actorId', '==', doc3.data().actorId).onSnapshot(response =>{
-                this.posts2 = [];        
-                      response.forEach(doc2 => {
-                          this.posts2.push(doc2.data())
-                          console.log(doc2.data())     
-                          alert("resultado:"+ posts2[0])             
-                      })             
-                  })              
-             })             
-         }  
-        )       
-        db.collection('tabla:Boutique').onSnapshot(response => {
+  async mounted() {           
+           
+        db.collection('boutiques').onSnapshot(response => {
              this.posts = [];        
              response.forEach(doc => {
                  this.posts.push(doc.data())         

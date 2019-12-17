@@ -10,7 +10,7 @@
                     <q-btn flat v-for="post in posts"
                        :key="post" @click="details()" class="contenedor">
                        <q-img
-                         :src="post.img"
+                         :src="post.foto"
                          spinner-color="white"
                          class="rounded-borders imagencloseth animated flipInY delay-5s"
                          
@@ -69,15 +69,19 @@ export default {
   this.$router.push({path: 'login'})
 }
         //Obtenemos a los usuario
-        db.collection('tabla:Productos').onSnapshot(response => {
-            this.posts = [];
-        
-            response.forEach(doc => {
-                this.posts.push(doc.data(),doc.id)
-                console.log(this.posts)
-                  
-            })
-        })},
+      
+
+          db.collection("prendas").doc("XpTKhAwFbK3V9xcuK7oc").collection("ropa").get()
+          
+          .then(querySnapshot => {
+            this.posts = []
+              querySnapshot.forEach(doc => {
+                  this.posts.push(doc.data(),doc.id)
+                  console.log(this.posts)
+              });
+          })
+
+        },
   }
  
 </script>

@@ -71,7 +71,7 @@ data() {
     crearNuevoDocumento(){
       let addDoc = db.collection('tabla:Productos').add({
         name: this.name,
-        url: this.url
+        img: this.url        
       }).then(ref => {
         console.log('Added document with ID: ', ref.id);
       });

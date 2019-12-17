@@ -6,14 +6,14 @@
         
           <q-card class="my-card" >    
                    
-            <img class="sombra" :src="posts[0].img" alt="">
+            <img class="sombra" :src="posts[0].foto" alt="">
           </q-card><br>
          
            <div class="row">
-                <p class="text-weight-light">{{posts[0].name}}</p>                
+                <p class="text-weight-light">{{posts[0].categoria}}</p>                
             </div>
            <div class="row">
-               <p style="font-size:25px;">$ {{posts[0].price}}</p>
+               <p style="font-size:25px;">$ {{posts[0].categoria}}</p>
                 <q-space />
                            
                <img src="../assets/icono1.png" style="width:9%; height:5%; margin-right:5%;"> 
@@ -40,7 +40,7 @@
       >
         <q-card>
           <q-card-section>
-            {{posts[0].description}}
+            {{posts[0].categoria}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -51,7 +51,7 @@
       >
         <q-card>
           <q-card-section>
-             {{posts[0].stock}}
+             {{posts[0].categoria}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -62,7 +62,6 @@
       >
         <q-card>
           <q-card-section>
-            {{boutiquesposts[0].address}}
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -109,7 +108,7 @@ export default {
   this.$router.push({path: 'login'})
   }       
   // traer detalles de la prenda
-        let productos = db.collection('tabla:Productos');
+        let productos = db.collection("prendas").doc("XpTKhAwFbK3V9xcuK7oc").collection("ropa");
         let queryRef = productos.where('id', '==', this.id).get()
               .then(snapshot => {
                 if (snapshot.empty) {
@@ -127,22 +126,22 @@ export default {
               })        
 
               // traer detalles de la prenda
-        let boutiques = db.collection('tabla:Boutique');
-        let queryRef2 = boutiques.where('idBoutique', '==', this.id).get()
-              .then(snapshot => {
-                if (snapshot.empty) {
-                  console.log('No matching documents2.');
-                  return;
-                }
-                snapshot.forEach(doc => {
-                  console.log(doc.id, '=>', doc.data());
-                  this.boutiquesposts.push(doc.data())
-                  console.log(this.boutiquesposts)                  
-                });
-              })
-              .catch(err => {
-                console.log('Error getting documents', err);
-              })   
+        // let boutiques = db.collection('boutiques').doc("XpTKhAwFbK3V9xcuK7oc").collection("ropa");
+        // let queryRef2 = boutiques.where('id', '==', this.id).get()
+        //       .then(snapshot => {
+        //         if (snapshot.empty) {
+        //           console.log('No matching documents2.');
+        //           return;
+        //         }
+        //         snapshot.forEach(doc => {
+        //           console.log(doc.id, '=>', doc.data());
+        //           this.boutiquesposts.push(doc.data())
+        //           console.log(this.boutiquesposts)                  
+        //         });
+        //       })
+        //       .catch(err => {
+        //         console.log('Error getting documents', err);
+        //       })   
         },
   created(){
     this.id = this.$route.params.idCategory;
