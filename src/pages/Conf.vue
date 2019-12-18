@@ -3,15 +3,18 @@
       <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; margin-top:5%;"/>
     <div class="q-gutter-sm" style="margin-top:5%;">        
     <q-list>
-    <h4 style="margin-top:-2%;">Filtros </h4>
-      <q-item tag="label" v-ripple style="margin-top:-14%;">
+    <h4 style="margin-top:-2%;">Filtros <p style="font-size:13px;">Usuario: {{usuario}} </p> </h4>
+  
+  <q-btn color="primary" label="Seleccionar Todos" @click="selectAll" style="margin-top:-20%;" />
+  
+      <q-item tag="label" v-ripple style="margin-top:-5%;">
         <q-item-section avatar>
           <q-checkbox v-model="color" val="Vestidos" color="black" />
         </q-item-section>
         <q-item-section>
           <q-item-label>Vestidos</q-item-label>
         </q-item-section>
-      </q-item>
+      </q-item>    
 
       <q-item tag="label" v-ripple class="espaciado">
         <q-item-section avatar>
@@ -87,7 +90,7 @@
 
       <q-item tag="label" v-ripple class="espaciado">
         <q-item-section avatar top>
-          <q-checkbox v-model="color" val="baño" color="black" />
+          <q-checkbox v-model="color" val="baño"  color="black" />
         </q-item-section>
         <q-item-section>
           <q-item-label>Trajes de baño</q-item-label>
@@ -95,7 +98,7 @@
       </q-item>
     
     </q-list>
-    </div>
+    </div> 
     <hr><br>
     <h5 style="margin-top:-2vh;">Rango de busqueda</h5>
       <div class="q-pa-md" style="margin-top:-5%;">
@@ -123,7 +126,8 @@ export default {
   
   data () {
     return {
-      color: [],
+      usuario: "",
+      color: [],            
         label: {
         min: 0,
         max: 50
@@ -139,13 +143,16 @@ export default {
 }).catch(function(error) {
   // An error happened.
 });
-    },
-    
+    },   
+    selectAll(){
+        this.color= ["baño","Tops","Bottom","Camisetas","Suéteres","Sudaderas","Chaquetas","Chaquetas", "Faldas","Vestidos","Blusas"]       
+    } 
     
   },
   mounted(){
-    
  var user = firebase.auth().currentUser;
+ this.usuario=user.email;
+ console.log(this.usuario)
      if (user != null) {
   user.providerData.forEach(function (profile) {
     console.log("Sign-in provider: " + profile.providerId);
