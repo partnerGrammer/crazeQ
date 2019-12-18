@@ -1,52 +1,39 @@
 <template>
-<div style="height: 90%;">
-             <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; left:-5%;"/>
+<div style="height: 90%; width:100%; position:absolute;">
+             <q-btn color="white" text-color="black" label="<" to="/slider" style="float:right; top:3%;"/>
              <div class="text-h5" style="margin-top:5%;margin-left:5%;">Prendas que te gustan</div>  
               <hr style="margin-top:5%;">
-    <div class="contenedor">            
+         
           
           <!-- Inicio segunda lista -->
-                                  <q-intersection
-                                    v-for="index in 10"
-                                    :key="index"
-                                    once
-                                    transition="scale"
-                                  >
-                                  <div class="row" style="margin-top:-1vh; margin-bottom:-10%;">
-                                    <!-- <div class="col-6"><img :src="post.url" style="width:33vw; "></div> -->
-                                     <q-btn flat class="caja"  to="/details" >
-                                     <q-img
-                                      :src="post.url"
-                                      spinner-color="white"
-                                      class="rounded-borders"
-                                      style="width:43vw;"
-                                    >
-                                    </q-img>
-                                    </q-btn>
-                                    
-                                    <q-space />
-                                    <!-- <div class="col-6"><img :src="post.url" style="width:33vw; margin-left:7%;"></div> -->
-                                    <q-btn flat class="caja"  to="/details" >
-                                     <q-img
-                                      :src="post.url"
-                                      spinner-color="white"
-                                      class="rounded-borders"
-                                      style="width:43vw;"
-                                    >
-                                    </q-img>
-                                    </q-btn>
-                                  </div>
-                                      
-
-                                  </q-intersection>
+          <div class="row">
+            <div class="q-col-gutter-x-xs q-col-gutter-y-lg" style="margin-bottom:20%;">
+                    <q-btn flat v-for="post in posts"
+                       :key="post" @click="details()" class="contenedor">                      
+                       <q-img
+                         :src="post.foto"
+                         spinner-color="white"
+                         class="rounded-borders imagencloseth animated flipInY delay-5s"
+                         
+                         to="/details"
+                       >
+                       <div class="text" style="width:100%; text-align:center;">Descripcion</div>
+                       </q-img>
+                     </q-btn>     
+                 
+                    </div>
+          </div>
+            
             <!-- fin segunda lista -->
       
     </div>
-    </div>
+  
 </template>
 
 <script>
-import axios from 'axios';
+import { db } from '../firebase/init'
+import firebase from 'firebase'
+let database = firebase.firestore();
 export default {
   name: 'PageIndex',
   data(){
@@ -55,23 +42,80 @@ export default {
         post: ''
     }
   },
+  
+    methods:{
+    details: function(){
+      this.$router.push({ path: `/details/${this.posts[1]}` }) 
+    }
+},
    created(){
 
-     axios.get("https://backend-app-laravel.herokuapp.com/api/getGallery").then(response=>{
-     this.posts = response.data;
-     this.post = response.data[0];
-     console.log(response); 
-     })
-        
-  }
+  
+  },
+  mounted() {
+     var user = firebase.auth().currentUser;
+     if (user != null) {
+  user.providerData.forEach(function (profile) {
+    console.log("Sign-in provider: " + profile.providerId);
+    console.log("  Provider-specific UID: " + profile.uid);
+    console.log("  Name: " + profile.displayName);
+    console.log("  Email: " + profile.email);
+    console.log("  Photo URL: " + profile.photoURL);
+  });
+}else{
+  this.$router.push({path: 'login'})
+}
+        //Obtenemos a los usuario
+      
+
+          db.collection("prendas").doc("XpTKhAwFbK3V9xcuK7oc").collection("ropa").get()
+          
+          .then(querySnapshot => {
+            this.posts = []
+              querySnapshot.forEach(doc => {
+                  this.posts.push(doc.data(),doc.id)
+                  console.log(this.posts)
+              });
+          })
+
+        },
   }
  
 </script>
 <style>
-.contenedor{
-    margin-left:   15%;
-    margin-right:  15%;
-    
-}
+
+ @media screen and (min-width: 150px) and (max-width: 400px) {
+      .contenedor{
+           left: 5%;
+      margin-left:   1%;
+      margin-right:  1%;
+      margin-bottom: -5%;
+      margin-top:    1%;    
+      }
+      .imagencloseth{
+        width:    90vw;
+        height:   100%;
+        -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+      }
+      }
+       @media screen and (min-width: 400px) and (max-width: 1400px) {
+      .contenedor{
+        left: 5%;
+      margin-left:   1%;
+      margin-right:  1%;
+      margin-bottom: -2%;
+      margin-top:    1%;    
+      }
+      .imagencloseth{
+        width:    90vw;
+        height:   100%;
+        -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+      }
+      }
+
 
 </style>

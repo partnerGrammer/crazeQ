@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
    
-<q-footer reveal persistent class="tipo">
+<q-footer reveal persistent class="tipo" >
   
         <q-tabs
          v-model="tab"
@@ -53,7 +53,7 @@
             <img src="~assets/home.png" class="imagen">
         </q-btn>
         <q-btn flat class="caja"  to="/closet" >
-            <img src="~assets/gancho.png" class="imagen" >
+            <img src="~assets/gancho.png" class="gancho" >
         </q-btn>
         <q-btn flat class="caja"  to="/map" >
             <img src="~assets/tiendas.png" class="imagen" >
@@ -71,6 +71,7 @@
   </q-layout>
 </template>
 
+
 <script>
 export default {
   name: 'MyLayout',
@@ -87,11 +88,12 @@ export default {
 }
 </script>
 <style>
-.caja{
+.caja{  
   margin-top: 3%;
   margin-bottom: 5%;
   margin-left: 5%;
   margin-right: 4%;
+  
   width:25%;
 }
 .imagen{
@@ -113,20 +115,53 @@ width:8vw; height: 4vh;
 }
 .tipo{
   height:8%;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+.gancho{
+  height:8vw;
+  height: 4vh;
 }
 }
-@media screen and (min-width: 750px) and (max-width: 1550px) {
+@media screen and (min-width: 350px) and (max-width: 650px) {
+     .caja{
+  margin-top: 2%;
+  margin-bottom: 3%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+.imagen{
+width:8vw; height: 4vh;
+}
+.tipo{
+  height:7%;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+.gancho{
+  height: 4vh;
+}
+}
+@media screen and (min-width: 650px) and (max-width: 1550px) {
      .caja{
   margin-top: 1%;
   margin-bottom: 3%;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 .imagen{
-width:7vw; height: 8vh;
+height: 6vh;
+}
+.gancho{
+  height:8vw;
 }
 .tipo{
-  height:12%;
+  height:9%;
+  -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+  -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 }
 </style>

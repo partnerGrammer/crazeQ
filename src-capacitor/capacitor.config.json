@@ -1,6 +1,6 @@
 {
   "appId": "com.geralucero.craze",
-  "appName": "Quasar App",
+  "appName": "Craze",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www"

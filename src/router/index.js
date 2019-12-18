@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+require('vue2-animate/dist/vue2-animate.min.css')
 import routes from './routes'
 
 Vue.use(VueRouter)

@@ -5,10 +5,10 @@
       
       <q-slide-item @left="onLeft" @right="onRight" left-color="pink-2" right-color="pink-2" ref="elemento">
         <template v-slot:left>
-          <img src="../assets/like.png" style="width:55%;"> 
+          <img src="../assets/dislike.png" class="boton"> 
         </template>
         <template v-slot:right>
-          <img src="../assets/dislike.png" style="width:55%;">
+          <img src="../assets/like.png" class="boton">
         </template>
         <q-item class="fondo">
           <q-card class="my-card altura">
@@ -68,26 +68,55 @@ export default {
     background-color: pink;
     /* position: fixed; */
   }
-  .altura{
+  
+  @media screen and (min-width: 150px) and (max-width: 350px) {
+      #like{
+        width:12%;
+        
+      }
+      #dislike{
+        width:12%;
+        margin-left:10%;
+      }
+      .boton{
+        width:35vw;
+        margin-top: 15%;
+      }
+      .altura{
     height: 82vh;
     /* width: 100%; */
   }
-  @media screen and (min-width: 150px) and (max-width: 750px) {
-      #like{
-        width:15%;
-      }
-      #dislike{
-        width:15%;
-        margin-left:10%;
-      }
     }
-  @media screen and (min-width: 750px) and (max-width: 1350px) {
+  @media screen and (min-width: 350px) and (max-width: 650px) {
       #like{
-        width:5%;
+        width:15%;
       }
       #dislike{
-        width:5%;
+        width:15%;
         margin-left:10%;
+      }
+      .boton{
+        width:65%;
+      }
+      .altura{
+    height: 82vh;
+    width: 100%
+  }
+    }
+  @media screen and (min-width: 650px) and (max-width: 1350px) {
+      #like{
+        width:15%;
+      }
+      #dislike{
+        width:15%;
+        margin-left:10%;
+      }
+      .boton{
+        width:100%;
+      }
+      .altura{
+        height: 78vh;
+        width: 100%
       }
     }
 
