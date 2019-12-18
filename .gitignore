@@ -7,6 +7,7 @@ node_modules
 /src-cordova/platforms
 /src-cordova/plugins
 /src-cordova/www
+/src-capacitor/
 /src-bex/www
 /src-bex/js/core
 npm-debug.log*
