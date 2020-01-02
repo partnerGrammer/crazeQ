@@ -58,7 +58,7 @@
         <q-btn flat class="caja"  to="/map" >
             <img src="~assets/tiendas.png" class="imagen" >
         </q-btn>
-        <q-btn flat class="caja"  to="/conf" >
+        <q-btn flat class="caja"  to="/settings" >
             <img src="~assets/config.png" class="imagen">
         </q-btn>
         
@@ -89,6 +89,10 @@ export default {
 }
 </script>
 <style>
+.header{
+        background-color: rgba(241, 170, 237, 1);
+    }
+    
 .caja{  
   margin-top: 3%;
   margin-bottom: 5%;

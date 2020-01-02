@@ -15,12 +15,13 @@ const routes = [{
             import ('pages/user/login.vue'),
     },
     {
-        path: '/details/:idCategory',
+        path: '/details/:id',
         component: () =>
             import ('layouts/MyLayout.vue'),
         children: [{
             path: '',
             name: 'details',
+            props: true,
             component: () =>
                 import ('pages/Details.vue')
         }]
@@ -33,7 +34,7 @@ const routes = [{
             path: '',
             name: 'map',
             component: () =>
-                import ('pages/Mapa.vue')
+                import ('pages/Map.vue')
         }]
     },
     {
@@ -44,18 +45,18 @@ const routes = [{
             path: '',
             name: 'closet',
             component: () =>
-                import ('pages/Closet.vue')
+                import ('pages/user/Closet.vue')
         }]
     },
     {
-        path: '/conf',
+        path: '/settings',
         component: () =>
             import ('layouts/MyLayout.vue'),
         children: [{
             path: '',
-            name: 'conf',
+            name: 'settings',
             component: () =>
-                import ('pages/Conf.vue')
+                import ('pages/Settings.vue')
         }]
     },
     {

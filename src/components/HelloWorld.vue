@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="icon" transition-show="flip-down" transition-hide="flip-up">
+  <q-dialog v-model="detalleBoutique" transition-show="flip-down" transition-hide="flip-up">
       <q-card style=" width:95%; position: fixed;">
         <q-card-section  style=" width:100%;" >
           <div class="row">
@@ -134,6 +134,7 @@ export default {
   },
   data(){
      return {
+       detalleBoutique: false,
         bar2: false,
          rating: 3,
         panel: 'Mapa',

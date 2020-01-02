@@ -3,7 +3,7 @@
         <q-page-container id='contenedor' class="fondo" >
             <q-page v-if="posts.length != 0">
 
-                <q-slide-item @left="onLeft" @right="onRight"  left-color="pink-2" right-color="pink-2" ref="elemento">
+                <q-slide-item @left="onLeft" @right="onRight" left-color="pink-2" right-color="pink-2" ref="elemento">
                     <template v-slot:left>
                         <img src="../assets/dislike.png" class="boton">
                     </template>
@@ -11,17 +11,22 @@
                         <img src="../assets/like.png" class="boton">
                     </template>
                     <q-item class="fondo">
-                        <q-btn @click="details"  class="altura" >
-                            <q-card   class="altura animated flipInY delay-5s" >
-                            <img :src="this.posts[0].foto" class="" style="width:100%; height:100%;">
+                        <q-btn :to="{ name:'details', params: { id: filtrarPosts[0].id } }" style="padding: 0;">
+                            <q-card class="altura animated flipInY delay-5s" flat>
+                                <div class="layer"></div>
+                                <img :src="filtrarPosts[0].foto" class="" style="width:110%;">
                             </q-card>
                         </q-btn>
                     </q-item>
                 </q-slide-item>
 
-                <div style="text-align:center;">
-                    <img id="like" src="../assets/like.png" @click="onLeft()">
-                    <img id="dislike" src="../assets/dislike.png" @click="onRight()">
+                <div class="row">
+                    <div class="col-6 acciones text-center">
+                        <img id="dislike" src="../assets/dislike.png" @click="onRight()">
+                    </div>
+                    <div class="col-6 acciones text-center">
+                        <img id="like" src="../assets/like.png" @click="onLeft()">
+                    </div>
                 </div>
 
             </q-page>
@@ -33,149 +38,174 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import { auth, firebase, db } from '../firebase'
-import { async } from 'q';
 
 export default {
-    name: 'PageIndex',
+    name: 'Slider',
     data(){
         return{
             posts: [],
-            likes: [],
-            post: ''
+            last: null,
         }
     },
 
-    created(){
-        this.creacion_o_no()
+    mounted() {
+        this.obtenerPrendas()
     },
 
-    async mounted() {
-        try {
-            let response = await db.collection('prendas')
-                .get()
-                .then(querySnapshot => {
-                    querySnapshot.forEach(doc => {
-                        console.log('Boutique: ', doc.id);
+    computed: {
+        ...mapState([
+            'sesion'
+        ]),
 
-                        let ropa = db.collection('prendas').doc(doc.id).collection('ropa').get()
-                            .then(querySnapshot => {
-                                querySnapshot.forEach(doc => {
-                                    console.log('Prenda: ', doc.id);
-                                    this.posts.push(doc.data());
-                                })
-                            })
+        filtrarPosts(){
+            if(this.sesion.configuracion != null){
+                let postsFiltrados = []
+
+                this.posts.forEach((element, index) => {
+                    this.sesion.configuracion.categorias.forEach(item => {
+                        if(item == element.categoria){
+                            postsFiltrados.push(element)
+                        }
                     })
                 })
-        } catch (e) {
-        
+
+                this.tamanoActual = postsFiltrados.length
+                return postsFiltrados
+            }
         }
-        // db.collection("prendas").doc("XpTKhAwFbK3V9xcuK7oc").collection("ropa").get()
-        // .then(querySnapshot => {
-        //     querySnapshot.forEach(doc => {
-        //         this.posts.push(doc.data(),doc.id)
-        //         console.log(this.posts)
-        //     });
-        // })
-
     },
 
-  methods:{
-    async onLeft(){
-        //         try {
-        //         let userid  = firebase.auth().currentUser.uid;
-        //         let cityRef = await db.collection('tabla:Likes').doc(userid).get();
-        //         console.log(cityRef)
-        //         if(cityRef.exists){
-        //         let data = cityRef.data();
-        //         data.arrayLikes.push(this.posts[0].id)
-        //         data.arrayTotal.push(this.posts[0].id)
-        //         await db.collection('tabla:Likes').doc(userid).set({
-        //         arrayLikes:     data.arrayLikes,
-        //         arrayDislikes:  data.arrayDislikes,
-        //         arrayTotal:     data.arrayLikes,
-        //         }).then(ref => {
-        //         console.log('Added document with ID: ',  this.posts[0].id);
-        //         });
-        //         }
-        // } catch (error) {
-        //     console.log('No se armo'+error)
-        // }
-        // this.posts.splice(0,2);
-        // this.post=this.posts[0];
-        // this.$refs.elemento.reset();
-
+    watch: {
+        filtrarPosts(){
+            if(this.filtrarPosts.length == 0 || this.filtrarPosts.length == 1){
+                this.obtenerSiguientesPrendas()
+            }
+        },
     },
 
-    async onRight(){
-        // try {
-        //     let userid  = firebase.auth().currentUser.uid;
-        //         let cityRef = await db.collection('tabla:Likes').doc(userid).get();
-        //         console.log(cityRef)
-        //         if(cityRef.exists){
-        //         let data = cityRef.data();
-        //         data.arrayDislikes.push(this.posts[0].id)
-        //         data.arrayTotal.push(this.posts[0].id)
-        //         await db.collection('tabla:Likes').doc(userid).set({
-        //         arrayLikes:     data.arrayLikes,
-        //         arrayDislikes:  data.arrayDislikes,
-        //         arrayTotal:     data.arrayTotal,
-        //         }).then(ref => {
-        //         console.log('Added document with ID: ',  this.posts[0].id);
-        //         });
-        //         }
-        // } catch (error) {
-        //     console.log('No se armo'+error)
-        // }
-        // this.posts.splice(0,2);
-        // this.post=this.posts[0];
-        // this.$refs.elemento.reset();
+    methods:{
 
-    },
-    details: function(){
-        //this.$router.push({ path: `/details/${this.posts[1]}` })
-    },
-              // Inicializar arreglos
-              async boceto(){                
-                //  try{
-                //       db.collection('tabla:Likes').doc(this.userid).set({
-                //       arrayLikes:  [],
-                //       arrayTotal:     [],
-                //       arrayDislikes:     [],
-                //       }).then(ref => {
-                //         console.log('Added document with ID: ', ref.id);
-                //       });
-                // }
-                // catch(error){
-                //   console.log(error)
-                // }
-                    }, //    Fin Dislike
+        async obtenerPrendas(){
+                try {
+                let response = await db.collection('prendas')
+                    .orderBy('id')
+                    .limit(4)
+                    .startAt(this.sesion.indice)
+                    .onSnapshot(query => {
+                        this.last = query.docs[query.docs.length - 1];
+                        query.forEach(doc => {
+                            this.posts.push(doc.data())
+                        })
+                        
+                    })
+                
+            } catch (e) {
+                console.log(e)
+            }
+            finally{
+                
+            }
+        },
 
-              async creacion_o_no(){     
-                    //   const usersRef = db.collection('tabla:Likes').doc(this.userid)
+        async obtenerSiguientesPrendas(){
+            try {
+                db.collection('prendas')
+                    .orderBy('id')
+                    .limit(4)
+                    .startAfter(this.last)
+                    .onSnapshot(query => {
+                        this.last = query.docs[query.docs.length - 1];
+                        query.forEach(doc => {
+                            this.posts.push(doc.data())
+                        })
+                    })
+            } catch (e) {
+                console.log(e)
+            }
+            
+        },
 
-                    //   usersRef.get()
-                    //     .then((docSnapshot) => {
-                    //       if (docSnapshot.exists) {
-                    //         usersRef.onSnapshot((doc) => {
-                    //           console.log("Si existe, todo bien");
-                    //         });
-                    //       } else {
-                    //         console.log("No existe, todo mal");
-                    //         this.boceto()
-                    //       }
-                    //   });
-                    }
+        async onLeft(){
 
-  }
+            try {
+                let response = await db.collection('likes')
+                                        .doc(this.sesion.usuario.uid)
+                                        .collection('disLike')
+                                        .doc(this.posts[0].id)
+                                        .set(this.posts[0])
+                //await db.collection('usuarios').doc(this.sesion.usuario.uid).set({ lastPost: this.posts[1].id }, { merge: true })
+                
+                //this.$store.commit('sesion/actualizarIndice', this.posts[1].id)
+
+                let index = this.posts.findIndex(element => element.id == this.filtrarPosts[0].id)
+
+                this.posts.splice(index, 1)
+                
+                this.$refs.elemento.reset()
+            
+            } catch (e) {
+                console.log(e)
+            }
+        },
+
+        async onRight(){
+
+            try {
+                let response = await db.collection('likes')
+                                        .doc(this.sesion.usuario.uid)
+                                        .collection('like')
+                                        .doc(this.posts[0].id)
+                                        .set(this.posts[0])
+                //await db.collection('usuarios').doc(this.sesion.usuario.uid).set({ lastPost: this.posts[1].id }, { merge: true })
+                
+                //this.$store.commit('sesion/actualizarIndice', this.posts[1].id)
+                
+                let index = this.posts.findIndex(element => element.id == this.filtrarPosts[0].id)
+
+                this.posts.splice(index, 1)
+            
+                this.$refs.elemento.reset()
+            } catch (e) {
+                console.log(e)
+            }
+        },
+    }
 }
 </script>
 <style>
-  .fondo{
-    background-color: pink;
-    /* position: fixed; */
-  }
+    .fondo{
+        background-color: rgba(241, 170, 237, 1);
+    }
 
-  @media screen and (min-width: 150px) and (max-width: 350px) {
+    .layer{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .contenedor-imagen{
+        padding: 0;
+    }
+
+    .q-slide-item__content .q-btn__wrapper {
+        padding: 0;
+    }
+
+    .altura{
+        height: 85vh;
+    }
+
+    .acciones{
+        height: 15vh;
+    }
+
+    .acciones img{
+        width: 50px;
+    }
+
+  /* @media screen and (min-width: 150px) and (max-width: 350px) {
       #like{
         width:12%;
       }
@@ -223,6 +253,6 @@ export default {
         height: 78vh;
         width: 100%
       }
-    }
+    } */
 
 </style>
