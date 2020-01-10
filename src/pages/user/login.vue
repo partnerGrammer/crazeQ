@@ -149,8 +149,22 @@ export default {
             auth.languageCode = 'es_MX'
 
             try {
-                await auth.signInWithPopup(provider)
-                this.$router.push({ name: 'slider' })
+                //await auth.signInWithPopup(provider)
+
+                await auth.signInWithRedirect(provider).then( () => {
+                    return auth.getRedirectResult()
+                }).then((result) => {
+                    let token = result.credential.accessToken
+                    let user = result.user
+
+                    if(result){
+                        this.$router.push({ name: 'slider' })
+                    }
+                }).catch(function(error) {
+                    let errorCode = error.code
+                    let errorMessage = error.message
+                })
+
             } catch (e) {
                 console.log(e)
                 this.mostrarNotificacion('Ocurrio un error validando tu informacion', 'negative')

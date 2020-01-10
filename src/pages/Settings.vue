@@ -68,6 +68,14 @@ export default {
     },
 
     methods:{
+        mostrarNotificacion(mensaje, color){
+            this.$q.notify({
+                    message: mensaje,
+                    position: 'top',
+                    color: color,
+            })
+        },
+
         async obtenerCategorias(){
             try {
                 let response = await db.collection('categorias')
@@ -78,7 +86,7 @@ export default {
                                             })
                                         })
             } catch (e) {
-            
+                console.log(e)
             }
         },
 
@@ -109,10 +117,16 @@ export default {
             try {
                 let response = await db.collection('configuraciones')
                                         .doc(this.sesion.usuario.uid)
-                                        .set(configuracion)               
+                                        .set(configuracion)  
+                this.mostrarNotificacion('Configuracion guardada', 'purple')             
             } catch (e) {
                 console.log(e)
             }
+        },
+
+        logout(){
+            this.$store.dispatch('sesion/cerrarSesion', )
+            this.$router.push({ name: 'home' })
         }
     },
 

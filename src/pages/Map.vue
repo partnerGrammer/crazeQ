@@ -41,7 +41,7 @@
                 <q-tab-panel name="Listado" flat>
                     <div class="text-h6" style="margin-top:1%;">Listado de tiendas</div>
                     <q-list>  
-                        <q-item v-for="(item, index) in boutiques" :key="index" clickable v-ripple>
+                        <q-item v-for="(item, index) in boutiques" :key="index" clickable v-ripple :to="{ name:'store', params: { id: item.id } }">
                             <q-item-section avatar>
                                 <q-avatar rounded>
                                     <img :src="item.logo" class="" style="width:100%;">

@@ -11,10 +11,10 @@
                         <img src="../assets/like.png" class="boton">
                     </template>
                     <q-item class="fondo">
-                        <q-btn :to="{ name:'details', params: { id: filtrarPosts[0].id } }" style="padding: 0;">
+                        <q-btn :to="{ name:'details', params: { id: posts[0].id } }" style="padding: 0;">
                             <q-card class="altura animated flipInY delay-5s" flat>
                                 <div class="layer"></div>
-                                <img :src="filtrarPosts[0].foto" class="" style="width:110%;">
+                                <img :src="posts[0].foto" class="" style="width:110%;">
                             </q-card>
                         </q-btn>
                     </q-item>
@@ -139,7 +139,7 @@ export default {
 
                 let index = this.posts.findIndex(element => element.id == this.filtrarPosts[0].id)
 
-                this.posts.splice(index, 1)
+                this.posts.splice(0, 1)
                 
                 this.$refs.elemento.reset()
             
@@ -162,7 +162,7 @@ export default {
                 
                 let index = this.posts.findIndex(element => element.id == this.filtrarPosts[0].id)
 
-                this.posts.splice(index, 1)
+                this.posts.splice(0, 1)
             
                 this.$refs.elemento.reset()
             } catch (e) {

@@ -5,6 +5,7 @@ Vue.use(Router)
 
 const routes = [{
         path: '/',
+        name: 'home',
         component: () =>
             import ('pages/Home.vue'),
     },
@@ -24,6 +25,18 @@ const routes = [{
             props: true,
             component: () =>
                 import ('pages/Details.vue')
+        }]
+    },
+    {
+        path: '/store/:id',
+        component: () =>
+            import ('layouts/MyLayout.vue'),
+        children: [{
+            path: '',
+            name: 'store',
+            props: true,
+            component: () =>
+                import ('pages/Store.vue')
         }]
     },
     {
@@ -79,17 +92,6 @@ const routes = [{
             }
         }]
     },
-    {
-        path: '/subir',
-        component: () =>
-            import ('layouts/MyLayout.vue'),
-        children: [{
-            path: '',
-            name: 'subir',
-            component: () =>
-                import ('pages/index2.vue')
-        }]
-    }
 ]
 
 
